@@ -4,3 +4,8 @@ export interface IFriend {
   image: string;
   balance: number;
 }
+
+export interface IButton {
+  onClick?: () => void;
+  children: React.ReactNode;
+}

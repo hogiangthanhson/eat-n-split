@@ -1,7 +1,14 @@
 import { IFriend } from "../interface";
 import Button from "./Button";
 
-export default function Friend({ friend }: { friend: IFriend }) {
+interface FriendProp {
+  friend: IFriend;
+  onSelection: (friend: IFriend) => void;
+  selectedFriend: IFriend;
+}
+export default function Friend({ friend, onSelection, selectedFriend }: FriendProp) {
+  const isSelected = selectedFriend?.id === friend.id;
+
   function renderBalance(friend: IFriend) {
     if (friend.balance < 0) {
       return (
@@ -21,11 +28,11 @@ export default function Friend({ friend }: { friend: IFriend }) {
   }
 
   return (
-    <li className="">
+    <li className={isSelected ? "selected" : ""}>
       <img src={friend.image} alt={friend.name} />
       <h3>{friend.name}</h3>
       {renderBalance(friend)}
-      <Button>Select</Button>
+      <Button onClick={() => onSelection(friend)}>{isSelected ? "Close" : "Select"}</Button>
     </li>
   );
 }

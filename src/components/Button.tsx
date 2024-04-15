@@ -1,3 +1,9 @@
-export default function Button({ children }: { children: React.ReactNode }) {
-  return <button className="button">{children}</button>;
+import { IButton } from "../interface";
+
+export default function Button({ onClick, children }: IButton) {
+  return (
+    <button className="button" onClick={onClick}>
+      {children}
+    </button>
+  );
 }
